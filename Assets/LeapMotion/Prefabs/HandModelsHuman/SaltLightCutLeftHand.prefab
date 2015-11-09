@@ -320,22 +320,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &100042
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 400044}
-  - 137: {fileID: 13700000}
-  m_Layer: 0
-  m_Name: salt_hand_left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &100044
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +346,22 @@ GameObject:
   - 114: {fileID: 11400010}
   m_Layer: 0
   m_Name: SaltLightCutLeftHand
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &131600
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 447392}
+  - 137: {fileID: 13799490}
+  m_Layer: 0
+  m_Name: female_hand_left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -652,18 +652,6 @@ Transform:
   - {fileID: 400040}
   m_Father: {fileID: 400046}
   m_RootOrder: 1
---- !u!4 &400044
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100042}
-  m_LocalRotation: {x: .707106769, y: 0, z: 0, w: .707106829}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: -1, y: -1, z: -1}
-  m_Children: []
-  m_Father: {fileID: 400046}
-  m_RootOrder: 0
 --- !u!4 &400046
 Transform:
   m_ObjectHideFlags: 1
@@ -674,9 +662,21 @@ Transform:
   m_LocalPosition: {x: 6.5745616, y: 12.4729605, z: -15.0326042}
   m_LocalScale: {x: 20, y: 20, z: 20}
   m_Children:
-  - {fileID: 400044}
+  - {fileID: 447392}
   - {fileID: 400042}
   m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!4 &447392
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 131600}
+  m_LocalRotation: {x: .707106829, y: 0, z: 0, w: .707106829}
+  m_LocalPosition: {x: -.591000021, y: -.305000007, z: -0}
+  m_LocalScale: {x: -.0500000007, y: -.0500000045, z: -.0500000045}
+  m_Children: []
+  m_Father: {fileID: 400046}
   m_RootOrder: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -695,6 +695,11 @@ MonoBehaviour:
   - {fileID: 400026}
   - {fileID: 400010}
   - {fileID: 400012}
+  joints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deformPosition: 0
   modelFingerPointing: {x: 1, y: 0, z: 0}
   modelPalmFacing: {x: -0, y: -1, z: -0}
 --- !u!114 &11400002
@@ -714,6 +719,11 @@ MonoBehaviour:
   - {fileID: 400032}
   - {fileID: 400014}
   - {fileID: 400016}
+  joints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deformPosition: 0
   modelFingerPointing: {x: 1, y: 0, z: 0}
   modelPalmFacing: {x: -0, y: -1, z: -0}
 --- !u!114 &11400004
@@ -733,6 +743,11 @@ MonoBehaviour:
   - {fileID: 400030}
   - {fileID: 400018}
   - {fileID: 400020}
+  joints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deformPosition: 0
   modelFingerPointing: {x: 1, y: 0, z: 0}
   modelPalmFacing: {x: -0, y: -1, z: -0}
 --- !u!114 &11400006
@@ -752,6 +767,11 @@ MonoBehaviour:
   - {fileID: 400028}
   - {fileID: 400022}
   - {fileID: 400024}
+  joints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deformPosition: 0
   modelFingerPointing: {x: 1, y: 0, z: 0}
   modelPalmFacing: {x: -0, y: -1, z: -0}
 --- !u!114 &11400008
@@ -771,6 +791,11 @@ MonoBehaviour:
   - {fileID: 400038}
   - {fileID: 400034}
   - {fileID: 400036}
+  joints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  deformPosition: 0
   modelFingerPointing: {x: 1, y: 0, z: 0}
   modelPalmFacing: {x: -0, y: -1, z: -0}
 --- !u!114 &11400010
@@ -786,21 +811,23 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   handModelPalmWidth: .0780000016
   fingers:
-  - {fileID: 11400008}
-  - {fileID: 11400006}
-  - {fileID: 11400004}
-  - {fileID: 11400002}
-  - {fileID: 11400000}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   palm: {fileID: 400042}
-  foreArm: {fileID: 0}
+  forearm: {fileID: 0}
+  wristJoint: {fileID: 0}
+  elbowJoint: {fileID: 0}
   modelFingerPointing: {x: 1, y: 0, z: 0}
   modelPalmFacing: {x: -0, y: -1, z: -0}
---- !u!137 &13700000
+--- !u!137 &13799490
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 100042}
+  m_GameObject: {fileID: 131600}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -822,29 +849,29 @@ SkinnedMeshRenderer:
   serializedVersion: 2
   m_Quality: 4
   m_UpdateWhenOffscreen: 0
-  m_Mesh: {fileID: 4300000, guid: 0f21e392b49da41c2baf8f6718ac14b4, type: 3}
+  m_Mesh: {fileID: 4300002, guid: a263540df2704495e91da11beb21885a, type: 3}
   m_Bones:
-  - {fileID: 400040}
-  - {fileID: 400038}
-  - {fileID: 400036}
-  - {fileID: 400034}
-  - {fileID: 400032}
-  - {fileID: 400030}
-  - {fileID: 400028}
-  - {fileID: 400026}
-  - {fileID: 400024}
-  - {fileID: 400022}
-  - {fileID: 400020}
-  - {fileID: 400018}
-  - {fileID: 400016}
-  - {fileID: 400014}
-  - {fileID: 400012}
-  - {fileID: 400010}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   m_BlendShapeWeights: []
   m_RootBone: {fileID: 400040}
   m_AABB:
-    m_Center: {x: -.0736598819, y: .0145870727, z: .01296027}
-    m_Extent: {x: .100345597, y: .0566566736, z: .0755572245}
+    m_Center: {x: -.0734600574, y: .0145324674, z: .0129602812}
+    m_Extent: {x: .10014616, y: .0566025451, z: .0755572617}
   m_DirtyAABB: 0
 --- !u!1001 &100100000
 Prefab:
