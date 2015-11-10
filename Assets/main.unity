@@ -177,12 +177,12 @@ Prefab:
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftGraphicsModel
       value: 
-      objectReference: {fileID: 11400010, guid: 803e5afd6582b44ae90ede39c52c3554,
+      objectReference: {fileID: 11422080, guid: c0794c2cd6e84874db8d2758a60f07c9,
         type: 2}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: rightGraphicsModel
       value: 
-      objectReference: {fileID: 11446484, guid: 2518e0cef0a017e4096e6e066db2f054,
+      objectReference: {fileID: 11400006, guid: 38c9cece84724db4c9a5bfcbdf2e2115,
         type: 2}
     - target: {fileID: 11400000, guid: c9f2277f2b4414ff9abf05e783890171, type: 2}
       propertyPath: leftPhysicsModel
@@ -345,12 +345,16 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 411404, guid: 2518e0cef0a017e4096e6e066db2f054, type: 2}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 194074, guid: 2518e0cef0a017e4096e6e066db2f054, type: 2}
       propertyPath: m_Name
       value: SaltLightFullRightHand
       objectReference: {fileID: 0}
+    - target: {fileID: 13788156, guid: 2518e0cef0a017e4096e6e066db2f054, type: 2}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5e64f2fcfcdeb854ab8acfcd15f7b2fc, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2518e0cef0a017e4096e6e066db2f054, type: 2}
   m_IsPrefabParent: 0
@@ -510,7 +514,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 400022, guid: 803e5afd6582b44ae90ede39c52c3554, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 803e5afd6582b44ae90ede39c52c3554, type: 2}
@@ -587,7 +591,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 5
 --- !u!1 &1178401790
 GameObject:
   m_ObjectHideFlags: 0
