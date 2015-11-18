@@ -26,6 +26,49 @@ public class Tournament : Constant {
 
     /// -----------------------トーナメント処理に用いる変数(ここまで)--------------------
 
+
+    /// -----------------------トーナメント表作成----------------------------------------
+    public void create_tournament_table()
+    {
+        int member, i = 0, k = 0;
+
+        // 結果表の初期化
+        for(member = 0; member < MEMBER; member++)
+            for(i = 0; i < 2; i++)
+                result[member, i] = 0;
+            
+        // 対戦表の初期化
+        for (member = 0; member < MEMBER; member++)
+        {
+            i = 0;
+
+            if (i < MEMBER)
+            {
+                match[member, i] = k;
+                match[member, i + 1] = k + 1;
+                match[member, i + 2] = member;
+                k += 2;
+            }
+
+            else
+            {
+                match[member, i] = -1;
+                match[member, i + 1] = -1;
+                match[member, i + 2] = member;
+            }
+        }
+
+        for (i = 0; i < 200; i++)
+        {
+            int tmp = 0;
+
+            // 1個目を選択
+            int r1 = Random.Range(0, 4);
+             
+        }
+    }
+
+
 	// Use this for initialization
 	void Start () {
 	
