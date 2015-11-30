@@ -54,7 +54,7 @@ Material:
       data:
         first:
           name: _Shininess
-        second: .00999999978
+        second: .968999982
       data:
         first:
           name: _Outline

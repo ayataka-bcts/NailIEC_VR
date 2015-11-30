@@ -7,10 +7,10 @@ Material:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: Nail001
-  m_Shader: {fileID: 45, guid: 0000000000000000f000000000000000, type: 0}
-  m_ShaderKeywords: _ALPHATEST_ON
+  m_Shader: {fileID: 100, guid: 0000000000000000f000000000000000, type: 0}
+  m_ShaderKeywords: _ALPHATEST_ON _DETAIL_MULX2
   m_LightmapFlags: 5
-  m_CustomRenderQueue: 2450
+  m_CustomRenderQueue: 2000
   stringTagMap:
     RenderType: TransparentCutout
   m_SavedProperties:
@@ -20,9 +20,9 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: 95d0e6c5de2b2d34e8dbbfbbea82cc83, type: 3}
-          m_Scale: {x: 30, y: 30}
-          m_Offset: {x: .5, y: 0}
+          m_Texture: {fileID: 2800000, guid: cee38a6226a3a36408049df731530ea7, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _BumpMap
@@ -35,6 +35,13 @@ Material:
           name: _DetailNormalMap
         second:
           m_Texture: {fileID: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _DecalTex
+        second:
+          m_Texture: {fileID: 2800000, guid: c363dc77ef9e2834c9e086c4cb963627, type: 3}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
@@ -56,8 +63,8 @@ Material:
           name: _EmissionMap
         second:
           m_Texture: {fileID: 0}
-          m_Scale: {x: 30, y: 30}
-          m_Offset: {x: .5, y: 0}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
       data:
         first:
           name: _DetailMask
@@ -69,8 +76,8 @@ Material:
         first:
           name: _DetailAlbedoMap
         second:
-          m_Texture: {fileID: 0}
-          m_Scale: {x: 100, y: 100}
+          m_Texture: {fileID: 2800000, guid: c363dc77ef9e2834c9e086c4cb963627, type: 3}
+          m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
       data:
         first:
@@ -86,6 +93,13 @@ Material:
           m_Texture: {fileID: 0}
           m_Scale: {x: 1, y: 1}
           m_Offset: {x: 0, y: 0}
+      data:
+        first:
+          name: _ColorRamp
+        second:
+          m_Texture: {fileID: 2800000, guid: c363dc77ef9e2834c9e086c4cb963627, type: 3}
+          m_Scale: {x: 1, y: 1}
+          m_Offset: {x: 0, y: 0}
     m_Floats:
       data:
         first:
@@ -98,7 +112,7 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0
       data:
         first:
           name: _Shininess
@@ -114,7 +128,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .5
+        second: 1
       data:
         first:
           name: _BumpScale
@@ -139,6 +153,10 @@ Material:
         first:
           name: _Metallic
         second: 0
+      data:
+        first:
+          name: _ColorRampOffset
+        second: 0
     m_Colors:
       data:
         first:
@@ -151,4 +169,8 @@ Material:
       data:
         first:
           name: _SpecColor
-        second: {r: 0, g: 0, b: 0, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
+      data:
+        first:
+          name: _Emission
+        second: {r: 0, g: 0, b: 0, a: 0}
