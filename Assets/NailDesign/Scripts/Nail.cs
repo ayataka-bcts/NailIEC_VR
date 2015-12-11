@@ -6,7 +6,7 @@ using System.Collections;
 public class Nail : MonoBehaviour {
 
     // 手のスキンのテクスチャ画像
-	public static Texture2D tex;
+    public Texture2D tex;
 
     // 各指の爪にあたる部分の座標を格納した配列
     // area[0][0]：爪部分のx座標の始点，area[0][1]：爪部分のy座標の始点
@@ -17,8 +17,8 @@ public class Nail : MonoBehaviour {
     private int[,] area_rng = new int[2, 2] { {35, 585}, {61, 616} };
     private int[,] area_pnk = new int[2, 2] { {39, 540}, {61, 564} };
 
-    // ネイルデザインを描画
-    void DrawingArt(int[,] area, Texture2D tex)
+    // 長方形の描画
+    void DrawingRectangle(int[,] area, Texture2D tex)
     {
         // 座標を指定してデザインを描画
         for (int x = area[0, 0]; x < area[1, 0]; x++)
@@ -31,7 +31,6 @@ public class Nail : MonoBehaviour {
 
         // テクスチャの確定
         tex.Apply();
-
     }
 
     // マテリアルを適用
@@ -45,20 +44,23 @@ public class Nail : MonoBehaviour {
     void DrawingAll(Texture2D tex)
     {
         // 各指部分のデザイン描画
-        DrawingArt(area_sum, tex);
-        DrawingArt(area_idx, tex);
-        DrawingArt(area_mdl, tex);
-        DrawingArt(area_rng, tex);
-        DrawingArt(area_pnk, tex);
+        DrawingRectangle(area_sum, tex);
+        DrawingRectangle(area_idx, tex);
+        DrawingRectangle(area_mdl, tex);
+        DrawingRectangle(area_rng, tex);
+        DrawingRectangle(area_pnk, tex);
     }
 
 	// Use this for initialization
 	void Start () {
 
-        string path = "Assets/Resources/Skin(1024).png";
+        tex = AssetDatabase.LoadAssetAtPath("Assets/Resources/Skin(1024).png", typeof(Texture2D)) as Texture2D;
+
+        // 描画用のTexture2D
         Texture2D design = new Texture2D(1024, 1024, TextureFormat.RGBA32, false);
 
-        tex = AssetDatabase.LoadAssetAtPath(path, typeof(Texture2D)) as Texture2D;
+        // コピー
+        design = tex;
 
         // ネイルデザインの描画
         DrawingAll(design);
