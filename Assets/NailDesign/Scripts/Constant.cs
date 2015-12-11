@@ -14,7 +14,7 @@ public class Constant : MonoBehaviour {
     public int member = MEMBER;
 
     // 遺伝子長(未設定)
-    public const int GENE_LENGTH = 15;
+    public const int GENE_LENGTH = 22;
     public int geneLength = GENE_LENGTH;
 
     // 選択処理のスケーリング
