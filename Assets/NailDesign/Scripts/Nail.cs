@@ -20,13 +20,48 @@ public class Nail : MonoBehaviour {
     // 長方形の描画
     void DrawingRectangle(int[,] area, Texture2D tex)
     {
+        int width = area[1, 0] - area[0, 0];
+        int height = area[1, 1] - area[0, 1]; 
+        Color[] colors = new Color[width * height];
+
         // 座標を指定してデザインを描画
-        for (int x = area[0, 0]; x < area[1, 0]; x++)
+        //for (int x = area[0, 0]; x < area[1, 0]; x++)
+        //{
+        //    for (int y = (area[1, 1] + area[0, 1]) / 2; y < area[1, 1]; y++)
+        //    {
+        //       tex.SetPixel(x, y, Color.red);
+        //       
+        //    }
+        //}
+
+        // 塗りつぶす分だけのピクセルを配列に格納
+        for (int i = 0; i < (width * height) / 2; i++)
         {
-            for (int y = (area[1, 1] + area[0, 1]) / 2; y < area[1, 1]; y++)
-            {
-                tex.SetPixel(x, y, Color.red);
-            }
+            colors[i] = Color.green;
+        }
+
+         // 範囲の半分位置から描画
+        tex.SetPixels(area[0, 0], area[0, 1] + (height / 2), width, (height / 2), colors);
+
+        // テクスチャの確定
+        tex.Apply();
+    }
+
+    // 三角形の描画
+    void DrawingTriangle(int[,] area, Texture2D tex)
+    {
+        int width = area[1, 0] - area[0, 0];
+        int height = area[1, 1] - area[0, 1];
+        Color[] colors = new Color[height];
+
+        for (int i = 0; i < height; i++)
+        {
+            colors[i] = Color.green;
+        }
+
+        for (int y = area[0, 1] + ((3 / 4) * height); y < area[1, 1]; y++)
+        {
+            tex.SetPixels(area[0, 0], y, y - (area[0, 1] + ((3 / 4) * height)) + 1, 1, colors);
         }
 
         // テクスチャの確定
@@ -51,11 +86,22 @@ public class Nail : MonoBehaviour {
         DrawingRectangle(area_pnk, tex);
     }
 
+    // 全ての指に対して描画を行う
+    void DrawingAll2(Texture2D tex)
+    {
+        // 各指部分のデザイン描画
+        DrawingTriangle(area_sum, tex);
+        DrawingTriangle(area_idx, tex);
+        DrawingTriangle(area_mdl, tex);
+        DrawingTriangle(area_rng, tex);
+        DrawingTriangle(area_pnk, tex);
+    }
+
 	// Use this for initialization
 	void Start () {
 
         tex = AssetDatabase.LoadAssetAtPath("Assets/Resources/Skin(1024).png", typeof(Texture2D)) as Texture2D;
-
+        
         // 描画用のTexture2D
         Texture2D design = new Texture2D(1024, 1024, TextureFormat.RGBA32, false);
 
@@ -63,7 +109,9 @@ public class Nail : MonoBehaviour {
         design = tex;
 
         // ネイルデザインの描画
-        DrawingAll(design);
+        //DrawingAll(design);
+
+        DrawingAll2(design);
 
         // マテリアルに反映
         ApplyMaterial(design);
