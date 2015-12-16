@@ -3,7 +3,7 @@ using UnityEditor;
 using System.IO;
 using System.Collections;
 
-public class Nail : MonoBehaviour {
+public class Nail : Constant {
 
     // 手のスキンのテクスチャ画像
     public Texture2D tex;
@@ -18,7 +18,8 @@ public class Nail : MonoBehaviour {
     private int[,] area_pnk = new int[2, 2] { {39, 540}, {61, 564} };
 
     // 長方形の描画
-    void DrawingRectangle(int[,] area, Texture2D tex)
+    ///(DrawTexture2D使った方がいいかも)
+    public void DrawingRectangle(int[,] area, Texture2D tex)
     {
         int width = area[1, 0] - area[0, 0];
         int height = area[1, 1] - area[0, 1]; 
@@ -48,7 +49,7 @@ public class Nail : MonoBehaviour {
     }
 
     // 三角形の描画
-    void DrawingTriangle(int[,] area, Texture2D tex)
+    public void DrawingTriangle(int[,] area, Texture2D tex)
     {
         int width = area[1, 0] - area[0, 0];
         int height = area[1, 1] - area[0, 1];
@@ -68,15 +69,21 @@ public class Nail : MonoBehaviour {
         tex.Apply();
     }
 
+    // 境界線の描画
+    public void DrawingLine(int[,] area, Texture2D tex)
+    {
+        
+    }
+
     // マテリアルを適用
-    void ApplyMaterial(Texture2D tex)
+    public void ApplyMaterial(Texture2D tex)
     {
         Material mat = GetComponent<Renderer>().material;
         mat.mainTexture = tex;
     }
 
     // 全ての指に対して描画を行う
-    void DrawingAll(Texture2D tex)
+    public void DrawingAll(Texture2D tex)
     {
         // 各指部分のデザイン描画
         DrawingRectangle(area_sum, tex);
@@ -87,7 +94,7 @@ public class Nail : MonoBehaviour {
     }
 
     // 全ての指に対して描画を行う
-    void DrawingAll2(Texture2D tex)
+    public void DrawingAll2(Texture2D tex)
     {
         // 各指部分のデザイン描画
         DrawingTriangle(area_sum, tex);

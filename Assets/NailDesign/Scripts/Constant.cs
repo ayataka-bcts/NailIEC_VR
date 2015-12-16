@@ -13,7 +13,7 @@ public class Constant : MonoBehaviour {
     public const int MEMBER = 8;
     public int member = MEMBER;
 
-    // 遺伝子長(未設定)
+    // 遺伝子長
     public const int GENE_LENGTH = 22;
     public int geneLength = GENE_LENGTH;
 
@@ -40,12 +40,24 @@ public class Constant : MonoBehaviour {
     public const int NO_WIN_POINT = 4;
 
     // デザインの要素数
-    public const int PATTERN = 5;
+    public const int PATTERN = 4;
     public int pattern = PATTERN;
 
     // 評価点正規化の有無(0:なし  1:あり)
     public const int NORMARIZED = 1;
     public int normarized = NORMARIZED;
 
-    /// ------------------評価点関係-----------------------------------------------------
+    /// ------------------評価点関係(ここまで)-------------------------------------------
+    
+    /// ------------------ ビット列関係 -------------------------------------------------
+
+    public const int COLOR_LENGTH = 9;
+
+    public const int LINE_LENGTH = 2;
+
+    public const int FRENCH_LENGTH = 2;
+
+    /// ----------------- ビット列関係(ここまで) ----------------------------------------
+
+
 }

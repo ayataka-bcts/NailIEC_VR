@@ -57,6 +57,7 @@ public class GeneticAlgolithm : Constant {
 
         // 数値変換
 
-
     }
+
+
 }

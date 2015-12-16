@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Tournament : Constant {
 
-    /// --------------------------トーナメント処理に用いる変数-------------------------
+    /// -------------------------- トーナメント処理に用いる変数 -----------------------------------
 
     //対戦終了判定用変数
     public int round_1 = 0;
@@ -23,11 +23,11 @@ public class Tournament : Constant {
 
     //各個体の評価点
     public int[] tournament_point = new int[MEMBER];
+     
+    /// ----------------------- トーナメント処理に用いる変数(ここまで) ----------------------------
 
-    /// -----------------------トーナメント処理に用いる変数(ここまで)--------------------
 
-
-    /// -----------------------トーナメント表作成----------------------------------------
+    /// ----------------------- トーナメント表作成 ------------------------------------------------
     public void create_tournament_table()
     {
         int member, i = 0, k = 0;
@@ -58,26 +58,133 @@ public class Tournament : Constant {
             }
         }
 
+        int tmp = 0, r1, r2, r3, r4;
+
         for (i = 0; i < 200; i++)
         {
-            int tmp = 0;
-
             // 1個目を選択
-            int r1 = Random.Range(0, 4);
-             
+            r1 = Random.Range(0, 4);
+            r2 = Random.Range(0, 2);
+            // 2個目を選択
+            r3 = Random.Range(0, 4);
+            r4 = Random.Range(0, 2);
+
+            // 入れ替え
+            tmp = match[r1, r2];
+            match[r1, r2] = match[r3, r4];
+            match[r3, r4] = tmp;
+        }
+
+        // 対戦終了判定用変数
+        round_1 = 0;
+        round_2 = 0;
+        semi_fin = 1;
+    }
+    /// ----------------------- トーナメント表作成(ここまで) --------------------------------------
+
+    /// ----------------------- 対戦結果処理 ------------------------------------------------------
+    /// 引数1；勝ち個体  引数2：負け個体  引数3：対戦No.  引数4：選ばれた手
+    public void round_result(int win_num, int lose_num, int match_num, int left_or_rigth)
+    {
+        // 勝ち個体の記録
+        result[match_num, 0] = win_num;
+
+        // 負け個体の記録
+        result[match_num, 1] = lose_num;
+
+        // 対戦終了判定
+        match[match_num, 2] = -1;
+        match[match_num, left_or_rigth] = -1;
+
+        //対戦表更新
+        switch (match_num)
+        {
+            case 0://一回戦第1試合
+                match[4, 0] = win_num;
+                break;
+            case 1://一回戦第2試合
+                match[4, 1] = win_num;
+                break;
+            case 2://一回戦第3試合
+                match[5, 0] = win_num;
+                break;
+            case 3://一回戦第4試合
+                match[5, 1] = win_num;
+                break;
+            case 4://準決勝第1試合
+                match[6, 0] = win_num;
+                break;
+            case 5://準決勝第2試合
+                match[6, 1] = win_num;
+                break;
+            case 6://決勝
+                match[7, 0] = win_num;
+                break;
+        }
+
+        //対戦終了判定
+        round_judge();
+    }
+    /// -------------------------- 対戦結果処理(ここまで) -----------------------------------------
+
+    /// -------------------------- 対戦終了判定 ---------------------------------------------------
+    public void round_judge()
+    {
+        // 一回戦終了判定
+        for (int i = 0; i < 4; i++)
+        {
+            if (i < 2)
+            {
+                if (match[i, 2] == -1)
+                    round_1 = 1;
+                else
+                {
+                    round_1 = 0;
+                    break;
+                }
+            }
+            else
+            {
+                if (match[i, 2] == -1)
+                    round_2 = 1;
+                else
+                {
+                    round_2 = 0;
+                    break;
+                }
+            }
+        }
+
+        //準決勝終了判定
+        //両対戦とも終了
+        if (match[4, 2] == -1 && match[5, 2] == -1)
+            semi_fin = 0;
+
+        //少なくとも片方の対戦が終了していない
+        if (match[4, 2] != -1 || match[5, 2] != -1)
+            semi_fin = 1;  
+    }
+    /// ------------------------- 対戦終了判定(ここまで) ------------------------------------------
+
+    /// ------------------------- 各個体の評価 ----------------------------------------------------
+    public void evaluation_individual()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (i < 4)
+                // 一回戦負けの個体
+                tournament_point[result[i, 1]] = NO_WIN_POINT;
+            else
+                // 準決勝負けの個体
+                tournament_point[result[i, 1]] = ONE_WIN_POINT;
+
+            // 準優勝個体
+            tournament_point[result[6, 1]] = SEMI_POINT;
+
+            // 優勝個体
+            tournament_point[result[6, 0]] = TOP_POINT;
         }
     }
-
-
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
+    /// ------------------------- 各個体の評価(ここまで) ------------------------------------------
 
 }
