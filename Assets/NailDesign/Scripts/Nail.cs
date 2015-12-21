@@ -19,7 +19,7 @@ public class Nail : Constant {
 
     // 長方形の描画
     ///(DrawTexture2D使った方がいいかも)
-    public void DrawingRectangle(int[,] area, Texture2D tex)
+    public void DrawingRectangle(int[,] area, Texture2D tex, Color col)
     {
         int width = area[1, 0] - area[0, 0];
         int height = area[1, 1] - area[0, 1]; 
@@ -38,7 +38,7 @@ public class Nail : Constant {
         // 塗りつぶす分だけのピクセルを配列に格納
         for (int i = 0; i < (width * height) / 2; i++)
         {
-            colors[i] = Color.green;
+            colors[i] = col;
         }
 
          // 範囲の半分位置から描画
@@ -49,15 +49,15 @@ public class Nail : Constant {
     }
 
     // 三角形の描画
-    public void DrawingTriangle(int[,] area, Texture2D tex)
+    public void DrawingTriangle(int[,] area, Texture2D tex, Color col)
     {
-        int width = area[1, 0] - area[0, 0];
+        //int width = area[1, 0] - area[0, 0];
         int height = area[1, 1] - area[0, 1];
         Color[] colors = new Color[height];
 
         for (int i = 0; i < height; i++)
         {
-            colors[i] = Color.green;
+            colors[i] = col;
         }
 
         for (int y = area[0, 1] + ((3 / 4) * height); y < area[1, 1]; y++)
@@ -70,38 +70,48 @@ public class Nail : Constant {
     }
 
     // 境界線の描画
-    public void DrawingLine(int[,] area, Texture2D tex)
+    public void DrawingLine(int[,] area, Texture2D tex, Color col)
     {
         
     }
 
     // マテリアルを適用
-    public void ApplyMaterial(Texture2D tex)
+    public void ApplyMaterial(Texture2D tex, GameObject obj)
     {
-        Material mat = GetComponent<Renderer>().material;
+        Material mat = obj.GetComponent<Renderer>().material;
         mat.mainTexture = tex;
     }
 
     // 全ての指に対して描画を行う
-    public void DrawingAll(Texture2D tex)
+    public void DrawingAllRect(Texture2D tex, Color col)
     {
         // 各指部分のデザイン描画
-        DrawingRectangle(area_sum, tex);
-        DrawingRectangle(area_idx, tex);
-        DrawingRectangle(area_mdl, tex);
-        DrawingRectangle(area_rng, tex);
-        DrawingRectangle(area_pnk, tex);
+        DrawingRectangle(area_sum, tex, col);
+        DrawingRectangle(area_idx, tex, col);
+        DrawingRectangle(area_mdl, tex, col);
+        DrawingRectangle(area_rng, tex, col);
+        DrawingRectangle(area_pnk, tex, col);
     }
 
     // 全ての指に対して描画を行う
-    public void DrawingAll2(Texture2D tex)
+    public void DrawingAllTri(Texture2D tex, Color col)
     {
         // 各指部分のデザイン描画
-        DrawingTriangle(area_sum, tex);
-        DrawingTriangle(area_idx, tex);
-        DrawingTriangle(area_mdl, tex);
-        DrawingTriangle(area_rng, tex);
-        DrawingTriangle(area_pnk, tex);
+        DrawingTriangle(area_sum, tex, col);
+        DrawingTriangle(area_idx, tex, col);
+        DrawingTriangle(area_mdl, tex, col);
+        DrawingTriangle(area_rng, tex, col);
+        DrawingTriangle(area_pnk, tex, col);
+    }
+
+    // 全ての指に対して描画を行う
+    public void DrawingAllLine(Texture2D tex, Color col)
+    {
+        DrawingLine(area_sum, tex, col);
+        DrawingLine(area_idx, tex, col);
+        DrawingLine(area_mdl, tex, col);
+        DrawingLine(area_rng, tex, col);
+        DrawingLine(area_pnk, tex, col);
     }
 
 	// Use this for initialization
@@ -118,10 +128,10 @@ public class Nail : Constant {
         // ネイルデザインの描画
         //DrawingAll(design);
 
-        DrawingAll2(design);
+        //DrawingAll2(design);
 
         // マテリアルに反映
-        ApplyMaterial(design);
+        //ApplyMaterial(design);
 
         string file = "Assets/test.png";
         byte[] pngData = design.EncodeToPNG();

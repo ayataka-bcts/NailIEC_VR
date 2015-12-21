@@ -19,7 +19,7 @@ Material:
         first:
           name: _MainTex
         second:
-          m_Texture: {fileID: 2800000, guid: c67d6de46980e8145a89939f6b5a849e, type: 3}
+          m_Texture: {fileID: 2800000, guid: b782924ba739b4041af93896f07ff493, type: 3}
           m_Scale: {x: 10, y: 10}
           m_Offset: {x: 0, y: 0}
       data:
@@ -97,11 +97,11 @@ Material:
       data:
         first:
           name: _Cutoff
-        second: .5
+        second: 0.5
       data:
         first:
           name: _Parallax
-        second: .0199999996
+        second: 0.02
       data:
         first:
           name: _ZWrite
@@ -109,7 +109,7 @@ Material:
       data:
         first:
           name: _Glossiness
-        second: .824999988
+        second: 0.825
       data:
         first:
           name: _BumpScale
@@ -133,7 +133,7 @@ Material:
       data:
         first:
           name: _Metallic
-        second: .526000023
+        second: 0.526
     m_Colors:
       data:
         first:
@@ -142,8 +142,8 @@ Material:
       data:
         first:
           name: _Color
-        second: {r: .926470578, g: .764667094, b: .0885596648, a: 1}
+        second: {r: 1, g: 1, b: 1, a: 1}
       data:
         first:
           name: _SpecColor
-        second: {r: .200000003, g: .200000003, b: .200000003, a: 1}
+        second: {r: 0.2, g: 0.2, b: 0.2, a: 1}
