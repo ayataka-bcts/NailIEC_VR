@@ -13,8 +13,8 @@ public class DesignGenerate : Nail {
     public static int[] line = new int[LINE_LENGTH];
     public static int[] french = new int[FRENCH_LENGTH];
 
-    public static new Individual ind_L = new Individual();
-    public static new Individual ind_R = new Individual();
+    public static Individual ind_L = new Individual();
+    public static Individual ind_R = new Individual();
 
     //ビット列をネイルデザインに変換
     public void Decode(int[] bit, Individual ind)
@@ -28,10 +28,10 @@ public class DesignGenerate : Nail {
         }
 
         for (int i = 0; i < LINE_LENGTH; i++)
-                line[i] = bit[2 * COLOR_LENGTH + i];
+            line[i] = bit[2 * COLOR_LENGTH + i];
 
         for (int i = 0; i < FRENCH_LENGTH; i++)
-            french[i] = bit[GENE_LENGTH - FRENCH_LENGTH + i];
+            french[i] = bit[2 * FRENCH_LENGTH + i]; //bit[GENE_LENGTH - FRENCH_LENGTH + i];
 
         // 色のデコード
         ind.nail_color_1 = ColorDecode(color_1);
@@ -44,6 +44,7 @@ public class DesignGenerate : Nail {
         ind.french = FrenchDecode(french);
     }
 
+    // デバッグ用の配列掃出し関数
     public void DebugArray(int[] array)
     {
         for (int i = 0; i < array.Length; i++)
@@ -71,7 +72,6 @@ public class DesignGenerate : Nail {
         float g = AllocateColor(ConvertDecimal(green));
         float b = AllocateColor(ConvertDecimal(blue));
 
-        Debug.Log(r); Debug.Log(g); Debug.Log(b);
 
         Color color = new Color(r, g, b);
 
@@ -135,6 +135,7 @@ public class DesignGenerate : Nail {
     // デザイン描画
     public void DrawingNail(Texture2D tex, Individual ind)
     {
+        Debug.Log("ind.french = " + ind.french + "");
         switch (ind.french)
         {
             // シンプルフレンチ
@@ -156,7 +157,7 @@ public class DesignGenerate : Nail {
             // クロスフレンチ
             case 3:
                 DrawingAllTri(tex, ind.nail_color_1);
-                DrawingAllTri(tex, ind.nail_color_2);
+                DrawingAllTri2(tex, ind.nail_color_2);
                 DrawingNailLine(tex, ind.line);
                 break;
         }
@@ -165,22 +166,23 @@ public class DesignGenerate : Nail {
     // 境界線を描画
     public void DrawingNailLine(Texture2D tex, int swch)
     {
+        Debug.Log("swch = " + swch + "");
         switch (swch)
         {
             case 0:
-                Color gold = new Color(230, 180, 34);
+                Color gold = new Color(0.91f, 0.70f, 0.13f);
                 DrawingAllLine(tex, gold);
                 break;
             case 1:
-                Color silver = new Color();
+                Color silver = new Color(0.5f, 0.5f, 0.5f);
                 DrawingAllLine(tex, silver);
                 break;
             case 2:
-                Color white = new Color();
+                Color white = new Color(0, 0, 0);
                 DrawingAllLine(tex, white);
                 break;
             case 3:
-                Color black = new Color();
+                Color black = new Color(1.0f, 1.0f, 1.0f);
                 DrawingAllLine(tex, black);
                 break;
         }
@@ -206,6 +208,9 @@ public class DesignGenerate : Nail {
             test_R[i] = Random.Range(0, 2);
         }
 
+        Debugger.Array(test_L);
+        Debugger.Array(test_R);
+
         Decode(test_L, ind_L);
         Decode(test_R, ind_R);
 
@@ -227,6 +232,5 @@ public class DesignGenerate : Nail {
 	
 	// Update is called once per frame
 	void Update () {
-	
 	}
 }

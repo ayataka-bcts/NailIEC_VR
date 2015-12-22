@@ -59,5 +59,17 @@ public class Constant : MonoBehaviour {
 
     /// ----------------- ビット列関係(ここまで) ----------------------------------------
 
+    /// ----------------- その他 --------------------------------------------------------
 
+    // 三角形描画の際の反転
+    public const int reverse = 1;
+
+    // 四角形描画の際の大きさ
+    public const int minimal = 1;
+
+    // 図形描画を標準で行うための変数
+    public const int normal = 0;
+
+    // 境界線の太さ(単位：ピクセル)
+    public const int LINE_BOLD = 3;
 }
