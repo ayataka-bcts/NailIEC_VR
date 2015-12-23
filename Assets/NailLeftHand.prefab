@@ -163,7 +163,7 @@ GameObject:
   - 137: {fileID: 13717022}
   m_Layer: 0
   m_Name: Nail_left
-  m_TagString: Hand
+  m_TagString: Left_Nail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

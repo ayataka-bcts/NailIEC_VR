@@ -191,16 +191,17 @@ public class DesignGenerate : Nail {
 	// Use this for initialization
 	void Start () {
 
-        tex = AssetDatabase.LoadAssetAtPath("Assets/Resources/Skin(1024).png", typeof(Texture2D)) as Texture2D;
+        Texture2D texL = AssetDatabase.LoadAssetAtPath("Assets/Resources/Skin(1024)_L.png", typeof(Texture2D)) as Texture2D;
+        Texture2D texR = AssetDatabase.LoadAssetAtPath("Assets/Resources/Skin(1024)_R.png", typeof(Texture2D)) as Texture2D;
         GameObject left, right;
 
-        left = GameObject.FindWithTag("Hand");
-        right = GameObject.FindWithTag("Hand");
+        left = GameObject.FindWithTag("Left_Nail");
+        right = GameObject.FindWithTag("Right_Nail");
 
         // 描画用のTexture2D
         Texture2D design_L = new Texture2D(1024, 1024, TextureFormat.RGBA32, false);
         Texture2D design_R = new Texture2D(1024, 1024, TextureFormat.RGBA32, false);
-        design_L = tex; design_R = tex;
+        design_L = texL; design_R = texR;
 
         for (int i = 0; i < GENE_LENGTH; i++)
         {

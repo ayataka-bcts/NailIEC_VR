@@ -41,7 +41,7 @@ GameObject:
   - 137: {fileID: 13783724}
   m_Layer: 0
   m_Name: Nail_right
-  m_TagString: Hand
+  m_TagString: Right_Nail
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -820,7 +820,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 144624}
   m_LocalRotation: {x: 0.7071066, y: -0.70710695, z: -0.00000011520229, w: 0.00000011520235}
-  m_LocalPosition: {x: 0, y: 3, z: -0.67247933}
+  m_LocalPosition: {x: -0.3, y: 6.2, z: -1.1}
   m_LocalScale: {x: 5.7218866, y: 5.7218857, z: 5.7218857}
   m_Children:
   - {fileID: 472052}
@@ -1117,7 +1117,7 @@ SkinnedMeshRenderer:
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_Materials:
-  - {fileID: 2100000, guid: 96b1d02e586bedc45b27e0bcd9151e5c, type: 2}
+  - {fileID: 2100000, guid: c04a5a31a47802c48b23fe5f91505dc4, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0

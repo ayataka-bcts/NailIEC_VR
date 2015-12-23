@@ -204,12 +204,8 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 475306, guid: 0f5101978432df2489fa2e6a91ba8397, type: 2}
       propertyPath: m_RootOrder
-      value: 6
+      value: 5
       objectReference: {fileID: 0}
-    - target: {fileID: 13783724, guid: 0f5101978432df2489fa2e6a91ba8397, type: 2}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: c04a5a31a47802c48b23fe5f91505dc4, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0f5101978432df2489fa2e6a91ba8397, type: 2}
   m_IsPrefabParent: 0
@@ -359,7 +355,6 @@ GameObject:
   - 33: {fileID: 1116201212}
   - 64: {fileID: 1116201211}
   - 23: {fileID: 1116201210}
-  - 114: {fileID: 1116201214}
   m_Layer: 0
   m_Name: floor
   m_TagString: Untagged
@@ -425,23 +420,6 @@ Transform:
   - {fileID: 1111473671}
   m_Father: {fileID: 0}
   m_RootOrder: 3
---- !u!114 &1116201214
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1116201209}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9f92611943c98d4ebef4bbbe4937ea7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  generation: 1000
-  member: 8
-  geneLength: 22
-  pattern: 4
-  normarized: 1
-  tex: {fileID: 0}
 --- !u!1 &1212274176
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,7 +565,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 417824, guid: e31a8980db5fdc740bec34bf2132ec81, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e31a8980db5fdc740bec34bf2132ec81, type: 2}

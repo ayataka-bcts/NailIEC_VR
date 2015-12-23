@@ -51,18 +51,18 @@ public class Nail : Constant {
     // 三角形の描画
     public void DrawingTriangle(int[,] area, Texture2D tex, Color col)
     {
-        //int width = area[1, 0] - area[0, 0];
+        int width = area[1, 0] - area[0, 0];
         int height = area[1, 1] - area[0, 1];
         Color[] colors = new Color[height];
 
-        for (int i = 0; i < height; i++)
+        for (int i = 0; i < width; i++)
         {
             colors[i] = col;
         }
 
-        for (int y = area[0, 1] + ((1/ 4) * height); y < area[1, 1]; y++)
+        for (int y = area[0, 1] + (height / 4); y < area[1, 1]; y++)
         {
-            tex.SetPixels(area[0, 0], y, y - (area[0, 1] + ((3 / 4) * height)) + 1, 1, colors);
+            tex.SetPixels(area[0, 0], y, y - (area[0, 1] + (height / 4)) + 1, 1, colors);
         }
 
         // テクスチャの確定
@@ -72,18 +72,18 @@ public class Nail : Constant {
     // 三角形の描画
     public void DrawingTriangle2(int[,] area, Texture2D tex, Color col)
     {
-        //int width = area[1, 0] - area[0, 0];
+        int width = area[1, 0] - area[0, 0];
         int height = area[1, 1] - area[0, 1];
         Color[] colors = new Color[height];
 
-        for (int i = 0; i < height; i++)
+        for (int i = 0; i < width; i++)
         {
             colors[i] = col;
         }
 
-        for (int y = area[0, 1]; y > area[1, 1] + height * (1 / 4); y--)
+        for (int y = area[1, 1] - 1; y > area[0, 1] + (height / 4) - 1; y--)
         {
-            tex.SetPixels(area[1, 0], y, y - (area[0, 1] + ((3 / 4) * height)) + 1, 1, colors);
+            tex.SetPixels(y - (area[0, 1] + (height / 4)) + area[0, 0], y, y - (area[0, 1] + (height / 4)) + 1, 1, colors);
         }
 
         // テクスチャの確定
@@ -160,29 +160,6 @@ public class Nail : Constant {
 
 	// Use this for initialization
 	void Start () {
-
-        tex = AssetDatabase.LoadAssetAtPath("Assets/Resources/Skin(1024).png", typeof(Texture2D)) as Texture2D;
-        
-        // 描画用のTexture2D
-        Texture2D design = new Texture2D(1024, 1024, TextureFormat.RGBA32, false);
-
-        // コピー
-        design = tex;
-
-        // ネイルデザインの描画
-        //DrawingAll(design);
-
-        //DrawingAll2(design);
-
-        // マテリアルに反映
-        //ApplyMaterial(design);
-
-        string file = "Assets/test.png";
-        byte[] pngData = design.EncodeToPNG();
-        File.WriteAllBytes(file, pngData);
-
-        Object.DestroyImmediate(tex);
-        tex = AssetDatabase.LoadAssetAtPath(file, typeof(Texture2D)) as Texture2D;
 
 	}
 	
