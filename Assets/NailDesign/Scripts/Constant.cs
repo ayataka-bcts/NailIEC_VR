@@ -72,4 +72,10 @@ public class Constant : MonoBehaviour {
 
     // 境界線の太さ(単位：ピクセル)
     public const int LINE_BOLD = 3;
+
+    // ライン描画(クロスフレンチ)
+    public const int cross = 1;
+
+    // ライン描画(ななめフレンチ)
+    public const int slant = 0;
 }

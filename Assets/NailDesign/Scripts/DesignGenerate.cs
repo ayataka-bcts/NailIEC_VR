@@ -140,50 +140,74 @@ public class DesignGenerate : Nail {
         {
             // シンプルフレンチ
             case 0:
-                DrawingAllRect(tex, ind.nail_color_1);
-                DrawingNailLine(tex, ind.line);
+                DrawingAll(tex, ind.nail_color_1);
+                DrawingNailLineRect(tex, ind.line);
                 break;
             // ななめフレンチ
             case 1:
-                DrawingAllTri(tex, ind.nail_color_1);
-                DrawingNailLine(tex, ind.line);
+                DrawingAll(tex, ind.nail_color_1, normal);
+                DrawingNailLineTri(tex, ind.line, slant);
                 break;
             // ダブルフレンチ
             case 2:
-                DrawingAllRect(tex, ind.nail_color_1);
-                DrawingAllRect(tex, ind.nail_color_2);
-                DrawingNailLine(tex, ind.line);
+                DrawingAll(tex, ind.nail_color_1, ind.nail_color_2);
+                DrawingNailLineRect(tex, ind.line);
                 break;
             // クロスフレンチ
             case 3:
-                DrawingAllTri(tex, ind.nail_color_1);
-                DrawingAllTri2(tex, ind.nail_color_2);
-                DrawingNailLine(tex, ind.line);
+                DrawingAll(tex, ind.nail_color_1, normal);
+                DrawingAll(tex, ind.nail_color_2, reverse);
+                DrawingNailLineTri(tex, ind.line, cross);
                 break;
         }
     }
 
-    // 境界線を描画
-    public void DrawingNailLine(Texture2D tex, int swch)
+    // 境界線を描画(長方形)
+    public void DrawingNailLineRect(Texture2D tex, int swch)
     {
         Debug.Log("swch = " + swch + "");
         switch (swch)
         {
             case 0:
                 Color gold = new Color(0.91f, 0.70f, 0.13f);
-                DrawingAllLine(tex, gold);
+                DrawingAllLineRect(tex, gold);
                 break;
             case 1:
                 Color silver = new Color(0.5f, 0.5f, 0.5f);
-                DrawingAllLine(tex, silver);
+                DrawingAllLineRect(tex, silver);
                 break;
             case 2:
                 Color white = new Color(0, 0, 0);
-                DrawingAllLine(tex, white);
+                DrawingAllLineRect(tex, white);
                 break;
             case 3:
                 Color black = new Color(1.0f, 1.0f, 1.0f);
-                DrawingAllLine(tex, black);
+                DrawingAllLineRect(tex, black);
+                break;
+        }
+    }
+
+    // 境界線を描画(三角形)
+    public void DrawingNailLineTri(Texture2D tex, int swch, int slant_or_cross)
+    {
+        Debug.Log("swch = " + swch + "");
+        switch (swch)
+        {
+            case 0:
+                Color gold = new Color(0.91f, 0.70f, 0.13f);
+                DrawingAllLineTri(tex, gold, slant_or_cross);
+                break;
+            case 1:
+                Color silver = new Color(0.5f, 0.5f, 0.5f);
+                DrawingAllLineTri(tex, silver, slant_or_cross);
+                break;
+            case 2:
+                Color white = new Color(0, 0, 0);
+                DrawingAllLineTri(tex, white, slant_or_cross);
+                break;
+            case 3:
+                Color black = new Color(1.0f, 1.0f, 1.0f);
+                DrawingAllLineTri(tex, black, slant_or_cross);
                 break;
         }
     }
