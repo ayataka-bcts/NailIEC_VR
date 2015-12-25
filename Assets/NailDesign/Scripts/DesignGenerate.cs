@@ -242,9 +242,6 @@ public class DesignGenerate : Nail {
         DrawingNail(design_L, ind_L);
         DrawingNail(design_R, ind_R);
 
-        ApplyMaterial(design_L, left);
-        ApplyMaterial(design_R, right);
-
         string file1 = "Assets/test1.png";
         string file2 = "Assets/test2.png";
 
@@ -257,5 +254,22 @@ public class DesignGenerate : Nail {
 	
 	// Update is called once per frame
 	void Update () {
+
+        Texture2D texL = AssetDatabase.LoadAssetAtPath("Assets/test1.png", typeof(Texture2D)) as Texture2D;
+        Texture2D texR = AssetDatabase.LoadAssetAtPath("Assets/test2.png", typeof(Texture2D)) as Texture2D;
+
+        GameObject left_hand = GameObject.FindGameObjectWithTag("Left_Nail");
+        GameObject right_hand = GameObject.FindGameObjectWithTag("Right_Nail");
+
+        // ネイルデザインを適用
+        if (left_hand == true)
+        {
+            ApplyMaterial(texL, left_hand);
+        }
+
+        if (right_hand == true)
+        {
+            ApplyMaterial(texR, right_hand);
+        }
 	}
 }
