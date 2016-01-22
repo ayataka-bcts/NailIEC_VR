@@ -30,6 +30,10 @@ public class TetsButton : Tournament
     public GameObject left;
     public GameObject right;
 
+    // 爪のスキンテクスチャ
+    public Texture2D tex_L;
+    public Texture2D tex_R;
+
     // 現在表示中の個体No表示用テキスト
     public GameObject left_number;
     public GameObject right_number;
@@ -68,8 +72,7 @@ public class TetsButton : Tournament
         ga = GameObject.Find("GA").GetComponent<GeneticAlgolithm>();
         //co = this.gameObject.GetComponent<Constant>();
 
-        left = GameObject.Find("Nail_left");
-        right = GameObject.Find("Nail_right");
+        
 
         left_number = GameObject.Find("LeftNumber");
         right_number = GameObject.Find("RightNumber");
@@ -88,6 +91,26 @@ public class TetsButton : Tournament
         start_time = Time.time;
         time_generation = Time.time;
         time_round = Time.time;
+
+    }
+
+    // 毎フレーム呼び出される関数
+    void Update()
+    {
+        left = GameObject.Find("Nail_left");
+        right = GameObject.Find("Nail_right");
+
+        RoundDisplay();
+        //SupportDisplay();
+
+        if (left == true)
+        {
+            DisplayNow(left, tex_L);
+        }
+        if (right == true)
+        {
+            DisplayNow(right, tex_R);
+        }
 
     }
 
@@ -201,8 +224,7 @@ public class TetsButton : Tournament
     {
         Material mat_L;
         Material mat_R;
-        Texture2D tex_L;
-        Texture tex_R;
+
         // 対戦Noに応じて分岐
         switch (round_now[2])
         {
@@ -213,7 +235,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 1:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -222,7 +244,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 2:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -231,7 +253,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 3:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -240,7 +262,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 4:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -249,7 +271,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 5:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -258,7 +280,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 6:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -267,7 +289,7 @@ public class TetsButton : Tournament
                 tex_R = (mat_R.mainTexture as Texture2D);
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
             case 7:
                 mat_L = GameObject.Find("Materials/Sphere" + (round_now[0] + 1)).GetComponent<Renderer>().material;
@@ -276,17 +298,17 @@ public class TetsButton : Tournament
                 tex_R = Resources.Load("Skin.png", typeof(Texture2D)) as Texture2D;
                 //tex_L = Resources.Load("Result/Generation" + generation + "/design" + (round_now[0] + 1), typeof(Texture2D)) as Texture2D;
                 //tex_R = Resources.Load("Result/Generation" + generation + "/design" + (round_now[1] + 1), typeof(Texture2D)) as Texture2D;
-                DisplayNow(tex_L, tex_R);
+                //DisplayNow(tex_L, tex_R);
                 break;
         }
 
     }
 
     // 現在の対戦デザインを表示
-    public void DisplayNow(Texture tex_L, Texture tex_R)
+    public void DisplayNow(GameObject nail, Texture tex)
     {
-        left.GetComponent<Renderer>().material.mainTexture = tex_L;
-        right.GetComponent<Renderer>().material.mainTexture = tex_R;
+        nail.GetComponent<Renderer>().material.mainTexture = tex;
+        //nail.GetComponent<Renderer>().material.mainTexture = tex;
 
     }
 
@@ -680,13 +702,9 @@ public class TetsButton : Tournament
 
         foreach (RawImage img in images)
         {
-            img.color = Color.black;
+            img.color = LINE_COLOR;
         }
     }
 
-    void Update()
-    {
-        RoundDisplay();
-        SupportDisplay();
-    }
+    
 }

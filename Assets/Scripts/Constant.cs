@@ -79,4 +79,6 @@ public class Constant : MonoBehaviour
 
     // ライン描画(ななめフレンチ)
     public const int slant = 0;
+
+    public Color LINE_COLOR = new Color(0.715f, 1.0f, 0.004f);
 }

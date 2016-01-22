@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class GenerationBegin : MonoBehaviour {
+public class LEDLight : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
@@ -12,4 +12,9 @@ public class GenerationBegin : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    void OnCollisionEnter()
+    {
+        Debug.Log("Enter!!");
+    }
 }
