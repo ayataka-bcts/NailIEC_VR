@@ -7,6 +7,7 @@ TagManager:
   - Left_Nail
   - Right_Nail
   - Hand
+  - End
   layers:
   - Default
   - TransparentFX

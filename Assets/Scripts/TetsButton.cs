@@ -18,10 +18,10 @@ public class TetsButton : Tournament
     public static int[] round_now = new int[3];
 
     // Tournamentクラスのインスタンス
-    //public Tournament tor;
+    public static Tournament tor;
 
     // GAクラスのインスタンス化
-    public GeneticAlgolithm ga;
+    public static GeneticAlgolithm ga;
 
     // 現在の世代数表示用テキスト
     public GameObject gene;
@@ -46,33 +46,27 @@ public class TetsButton : Tournament
     public static int generation = 1;
 
     // 対戦毎の評価時間計測
-    float[,] time_round_record = new float[MEMBER - 1, GENERATION];
+    double[,] time_round_record = new double[MEMBER - 1, GENERATION];
 
     // 1世代あたりの評価時間
     TimeSpan[] span_generation = new TimeSpan[GENERATION];
     // 1対戦あたりの評価時間
     TimeSpan[,] span_round = new TimeSpan[MEMBER, GENERATION];
 
-    // 時間計測用関数(総合)
-    public float start_time;
-    public float end_time;
-
     // 世代毎の時間計測用
-    public float time_generation;
+    DateTime time_generation;
 
     // 各対戦毎の時間計測用
-    public float time_round;
+    DateTime time_round;
 
     int[] non_normarized_point = new int[MEMBER];
 
     // コンストラクタみたいなもの
     void Start()
     {
-        //tor = this.gameObject.GetComponent<Tournament>();
+        tor = GameObject.Find("Tournament").GetComponent<Tournament>();
         ga = GameObject.Find("GA").GetComponent<GeneticAlgolithm>();
         //co = this.gameObject.GetComponent<Constant>();
-
-        
 
         left_number = GameObject.Find("LeftNumber");
         right_number = GameObject.Find("RightNumber");
@@ -88,9 +82,8 @@ public class TetsButton : Tournament
         round_now[2] = 0;
 
         // 開始時間の格納
-        start_time = Time.time;
-        time_generation = Time.time;
-        time_round = Time.time;
+        time_generation = DateTime.Now;
+        time_round = DateTime.Now;
 
     }
 
@@ -129,14 +122,14 @@ public class TetsButton : Tournament
     {
         // Lineを含んだ親
         GameObject parent;
-        RawImage[] lines;
+        Image[] lines;
 
         // 一回戦終了時
         if (round_now[2] < 4)
         {
 
-            parent = GameObject.Find("Line_" + numbers[result[round_now[2], 0]] + "");
-            lines = parent.GetComponentsInChildren<RawImage>();
+            parent = GameObject.Find("Line_" + numbers[tor.result[round_now[2], 0]] + "");
+            lines = parent.GetComponentsInChildren<Image>();
 
             lines[0].color = Color.red;
             lines[1].color = Color.red;
@@ -145,30 +138,30 @@ public class TetsButton : Tournament
         // 準決勝終了時
         else if (round_now[2] < 6)
         {
-            switch (result[round_now[2], 0])
+            switch (tor.result[round_now[2], 0])
             {
                 case 0:
                 case 1:
                     parent = GameObject.Find("Line_semi_A");
-                    lines = parent.GetComponentsInChildren<RawImage>();
+                    lines = parent.GetComponentsInChildren<Image>();
                     break;
                 case 2:
                 case 3:
                     parent = GameObject.Find("Line_semi_B");
-                    lines = parent.GetComponentsInChildren<RawImage>();
+                    lines = parent.GetComponentsInChildren<Image>();
                     break;
                 case 4:
                 case 5:
                     parent = GameObject.Find("Line_semi_C");
-                    lines = parent.GetComponentsInChildren<RawImage>();
+                    lines = parent.GetComponentsInChildren<Image>();
                     break;
                 case 6:
                 case 7:
                     parent = GameObject.Find("Line_semi_D");
-                    lines = parent.GetComponentsInChildren<RawImage>();
+                    lines = parent.GetComponentsInChildren<Image>();
                     break;
                 default:
-                    lines = GetComponents<RawImage>();
+                    lines = GetComponents<Image>();
                     break;
             }
 
@@ -179,21 +172,21 @@ public class TetsButton : Tournament
         // 決勝戦
         else
         {
-            if (0 <= result[round_now[2], 0] && result[round_now[2], 0] <= 3)
+            if (0 <= tor.result[round_now[2], 0] && tor.result[round_now[2], 0] <= 3)
             {
                 parent = GameObject.Find("Line_final_A");
-                lines = parent.GetComponentsInChildren<RawImage>();
+                lines = parent.GetComponentsInChildren<Image>();
             }
             else
             {
                 parent = GameObject.Find("Line_final_B");
-                lines = parent.GetComponentsInChildren<RawImage>();
+                lines = parent.GetComponentsInChildren<Image>();
             }
 
             lines[0].color = Color.red;
             lines[1].color = Color.red;
 
-            RawImage line = GameObject.Find("Line_last").GetComponent<RawImage>();
+            Image line = GameObject.Find("Line_last").GetComponent<Image>();
             line.color = Color.red;
         }
     }
@@ -316,10 +309,10 @@ public class TetsButton : Tournament
     public void LeftSelect()
     {
         // 決勝戦が終了していれば
-        if (match[7, 0] != -1)
+        if (tor.match[7, 0] != -1)
         {
             // エリート個体を左側に表示
-            round_now[0] = match[7, 0];
+            round_now[0] = tor.match[7, 0];
 
             // エリート画像の保存
 
@@ -335,10 +328,10 @@ public class TetsButton : Tournament
             //Debug.Log("round_now[2]" + round_now[2]);
             // round_now[0]の勝ち
             // トーナメント処理
-            round_result(round_now[0], round_now[1], round_now[2], 0);
+            tor.round_result(round_now[0], round_now[1], round_now[2], 0);
 
             // １世代あたりの時間を保存
-            time_round_record[round_now[2], generation] += Time.time - time_round;
+            time_round_record[round_now[2], generation - 1] += (DateTime.Now - time_round).TotalSeconds;
 
             // トーナメント表の更新
             UpdateTournament();
@@ -346,19 +339,19 @@ public class TetsButton : Tournament
             // 対戦更新
             for (int i = 0; i < MEMBER; i++)
             {
-                if (match[i, 2] != -1)
+                if (tor.match[i, 2] != -1)
                 {
                     //Debug.Log("match[x][0] = [" + match[0, 0] + "][" + match[1, 0] + "][" + match[2, 0] + "][" + match[3, 0] + "][" + match[4, 0] + "][" + match[5, 0] + "][" + match[6, 0] + "][" + match[7, 0] + "]");
                     //Debug.Log("match[x][1] = [" + match[0, 1] + "][" + match[1, 1] + "][" + match[2, 1] + "][" + match[3, 1] + "][" + match[4, 1] + "][" + match[5, 1] + "][" + match[6, 1] + "][" + match[7, 1] + "]");
                     //Debug.Log("match[x][2] = [" + match[0, 2] + "][" + match[1, 2] + "][" + match[2, 2] + "][" + match[3, 2] + "][" + match[4, 2] + "][" + match[5, 2] + "][" + match[6, 2] + "][" + match[7, 2] + "]");
                     for (int j = 0; j < 3; j++)
-                        round_now[j] = match[i, j];
+                        round_now[j] = tor.match[i, j];
                     break;
                 }
             }
 
             // 現在の時刻を取得
-            time_round = Time.time;
+            time_round = DateTime.Now;
 
         }
         //}
@@ -368,10 +361,10 @@ public class TetsButton : Tournament
     public void RightSelect()
     {
         // 決勝戦が終了していれば
-        if (match[7, 0] != -1)
+        if (tor.match[7, 0] != -1)
         {
             // エリート個体を左側に表示
-            round_now[0] = match[7, 0];
+            round_now[0] = tor.match[7, 0];
 
             // エリート画像の保存
 
@@ -387,10 +380,10 @@ public class TetsButton : Tournament
             //Debug.Log("round_now[2]" + round_now[2]);
             // round_now[1]の勝ち
             // トーナメント処理
-            round_result(round_now[1], round_now[0], round_now[2], 1);
+            tor.round_result(round_now[1], round_now[0], round_now[2], 1);
 
             // １世代あたりの時間を保存
-            time_round_record[round_now[2], generation] += Time.time - time_round;
+            time_round_record[round_now[2], generation - 1] += (DateTime.Now - time_round).TotalSeconds; ;
 
             // トーナメント表の更新
             UpdateTournament();
@@ -398,16 +391,19 @@ public class TetsButton : Tournament
             // 対戦更新
             for (int i = 0; i < MEMBER; i++)
             {
-                if (match[i, 2] != -1)
+                if (tor.match[i, 2] != -1)
                 {
                     //Debug.Log("match[x][0] = [" + match[0, 0] + "][" + match[1, 0] + "][" + match[2, 0] + "][" + match[3, 0] + "][" + match[4, 0] + "][" + match[5, 0] + "][" + match[6, 0] + "][" + match[7, 0] + "]");
                     //Debug.Log("match[x][1] = [" + match[0, 1] + "][" + match[1, 1] + "][" + match[2, 1] + "][" + match[3, 1] + "][" + match[4, 1] + "][" + match[5, 1] + "][" + match[6, 1] + "][" + match[7, 1] + "]");
                     //Debug.Log("match[x][2] = [" + match[0, 2] + "][" + match[1, 2] + "][" + match[2, 2] + "][" + match[3, 2] + "][" + match[4, 2] + "][" + match[5, 2] + "][" + match[6, 2] + "][" + match[7, 2] + "]");
                     for (int j = 0; j < 3; j++)
-                        round_now[j] = match[i, j];
+                        round_now[j] = tor.match[i, j];
                     break;
                 }
             }
+
+            // 現在の時刻を取得
+            time_round = DateTime.Now;
 
         }
         //}
@@ -416,17 +412,14 @@ public class TetsButton : Tournament
     // 終了ボタンが押されたら
     public void EndSelect()
     {
-        if (match[7, 0] != -1)
-        {
+        //if (match[7, 0] != -1)
+        //{
             // メッセージボックス(終了するか否かの確認)
             //var check = EditorUtility.DisplayDialog("確認", "終了してもよろしいですか？？", "OK", "Cancel");
-
-            //if (check == true)
-            //{
-
-            // 評価時間計測
-            end_time = Time.time - start_time;
-            //var time = end_time - start_time;
+            
+            // 評価時間測定
+            span_generation[generation - 1] = DateTime.Now - time_generation;
+            span_round[round_now[2], generation - 1] = DateTime.Now - time_round;
 
             // 評価情報，遺伝子列保存
             individual_save(1);
@@ -435,6 +428,10 @@ public class TetsButton : Tournament
             match_output();
 
             // 評価時間の出力
+            record_evaluation_time(1);
+
+            // ポップアップの削除
+            DeleteButtons();
 
             // エリート個体保存
 
@@ -444,7 +441,7 @@ public class TetsButton : Tournament
             //if (check == true)
             Application.Quit();
             //}
-        }
+        //}
     }
 
     // 次の世代ボタンがクリックされたら
@@ -454,20 +451,23 @@ public class TetsButton : Tournament
 
         //if (check == true)
         //{
-        if (match[7, 0] != -1)
-        {
+        //if (match[7, 0] != -1)
+        //{
             // 各個体の評価
-            evaluation_individual();
+            tor.evaluation_individual();
 
             // 評価点をgaに渡す
             for (int i = 0; i < MEMBER; i++)
-                ga.evaluation_point[i] = tournament_point[i];
-
+            {
+                //Debug.Log(ga.evaluation_point[i] + "=" + tor.tournament_point[i]);
+                ga.evaluation_point[i] = tor.tournament_point[i];
+            }
             //正規化の有無
             if (normarized == 1)
                 Normarized_Value();
 
             // 時間取得評価時間測定
+            span_generation[generation - 1] = DateTime.Now - time_generation;
 
             // 評価情報，遺伝子列のファイル保存
             individual_save(0);
@@ -480,22 +480,25 @@ public class TetsButton : Tournament
             generation++;
 
             // 新世代のトーナメント表作成
-            create_tournament_table();
+            tor.create_tournament_table();
 
             // round_nowを初期化
             // 1回戦1試合目の個体を設定
-            round_now[0] = match[0, 0];
-            round_now[1] = match[0, 1];
-            round_now[2] = match[0, 2];
+            round_now[0] = tor.match[0, 0];
+            round_now[1] = tor.match[0, 1];
+            round_now[2] = tor.match[0, 2];
 
             // トーナメントを初期化
             TournamentReset();
 
+            // ポップアップの削除
+            DeleteButtons();
+
             // 表示更新
 
             // 現在の時刻取得
-            time_generation = Time.time;
-            time_round = Time.time;
+            time_generation = DateTime.Now;
+            time_round = DateTime.Now;
 
             // シーンの再読み込み
             //SceneManager.LoadScene("main");
@@ -509,7 +512,7 @@ public class TetsButton : Tournament
                     temp[j] = ga.individual[j, i];
                 lo.CreateTexture(temp, i);
             }
-        }
+        //}
         //}
     }
 
@@ -598,7 +601,7 @@ public class TetsButton : Tournament
         sw.Write("Winner,");
 
         for (int i = 0; i < MEMBER - 1; i++)
-            sw.Write(result[i, 0].ToString() + ",");
+            sw.Write(tor.result[i, 0].ToString() + ",");
 
         //改行処理
         sw.WriteLine();
@@ -606,7 +609,7 @@ public class TetsButton : Tournament
         //見出し表示
         sw.Write(",Loser,");
         for (int i = 0; i < MEMBER - 1; i++)
-            sw.Write(result[i, 1].ToString() + ",");
+            sw.Write(tor.result[i, 1].ToString() + ",");
 
         //改行処理
         sw.WriteLine();
@@ -616,7 +619,7 @@ public class TetsButton : Tournament
         sw.Write(",Judge,");
         for (int i = 0; i < MEMBER - 1; i++)
         {
-            if (match[i, 2] == -1)
+            if (tor.match[i, 2] == -1)
                 sw.Write("End,");
             else
                 sw.Write("Yet,");
@@ -634,7 +637,7 @@ public class TetsButton : Tournament
         FileInfo fi;
         string copy_time_round, copy_time_generation;
 
-        fi = new FileInfo(LoadScene.output + "/Record.csv");
+        fi = new FileInfo(LoadScene.output + "/Evolution time.csv");
         sw = fi.AppendText();
 
         //見出し作成
@@ -695,14 +698,27 @@ public class TetsButton : Tournament
     }
 
     // ２世代目以降のトーナメント初期化
-    void TournamentReset()
+    public void TournamentReset()
     {
         GameObject parent = GameObject.Find("Lines");
-        RawImage[] images = parent.GetComponentsInChildren<RawImage>();
+        Image[] images = parent.GetComponentsInChildren<Image>();
 
-        foreach (RawImage img in images)
+        //Debug.Log("Enter");
+
+        foreach (Image img in images)
         {
             img.color = LINE_COLOR;
+        }
+    }
+
+    // 世代終了時に出現するボタンを削除する
+    public void DeleteButtons()
+    {
+        GameObject[] deletes = GameObject.FindGameObjectsWithTag("End");
+
+        for (int i = 0; i < 3; i++)
+        {
+            Destroy(deletes[i], 0.0f);
         }
     }
 

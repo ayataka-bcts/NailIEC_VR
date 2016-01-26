@@ -85,7 +85,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 417824}
   - 114: {fileID: 11442674}
-  - 65: {fileID: 6534878}
   m_Layer: 0
   m_Name: NailLeftHand
   m_TagString: Hand
@@ -905,18 +904,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 472730}
   m_RootOrder: 0
---- !u!65 &6534878
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 121962}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: -0.09171271, y: 0.05444103, z: 0.075138174}
-  m_Center: {x: 0.35910714, y: -0.20712581, z: 0.021503117}
 --- !u!114 &11427616
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -159,6 +159,7 @@ public class Tournament : Constant
     {
         for (int i = 0; i < 6; i++)
         {
+            Debug.Log(result[i, 1]);
             if (i < 4)
                 // 一回戦負けの個体
                 tournament_point[result[i, 1]] = NO_WIN_POINT;
