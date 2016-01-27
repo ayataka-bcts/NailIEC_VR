@@ -46,18 +46,18 @@ public class TetsButton : Tournament
     public static int generation = 1;
 
     // 対戦毎の評価時間計測
-    double[,] time_round_record = new double[MEMBER - 1, GENERATION];
+    public static double[,] time_round_record = new double[MEMBER - 1, GENERATION];
 
     // 1世代あたりの評価時間
-    TimeSpan[] span_generation = new TimeSpan[GENERATION];
+    public static TimeSpan[] span_generation = new TimeSpan[GENERATION];
     // 1対戦あたりの評価時間
-    TimeSpan[,] span_round = new TimeSpan[MEMBER, GENERATION];
+    public static TimeSpan[,] span_round = new TimeSpan[MEMBER, GENERATION];
 
     // 世代毎の時間計測用
-    DateTime time_generation;
+    public static DateTime time_generation;
 
     // 各対戦毎の時間計測用
-    DateTime time_round;
+    public static DateTime time_round;
 
     int[] non_normarized_point = new int[MEMBER];
 
@@ -84,6 +84,10 @@ public class TetsButton : Tournament
         // 開始時間の格納
         time_generation = DateTime.Now;
         time_round = DateTime.Now;
+
+        for (int i = 0; i < MEMBER - 1; i++)
+            for (int j = 0; j < GENERATION; j++)
+                time_round_record[i, j] = 0.0;
 
     }
 
@@ -330,8 +334,10 @@ public class TetsButton : Tournament
             // トーナメント処理
             tor.round_result(round_now[0], round_now[1], round_now[2], 0);
 
+            var temp = DateTime.Now - time_round;
+
             // １世代あたりの時間を保存
-            time_round_record[round_now[2], generation - 1] += (DateTime.Now - time_round).TotalSeconds;
+            time_round_record[round_now[2], generation - 1] = temp.TotalSeconds;
 
             // トーナメント表の更新
             UpdateTournament();
@@ -382,8 +388,10 @@ public class TetsButton : Tournament
             // トーナメント処理
             tor.round_result(round_now[1], round_now[0], round_now[2], 1);
 
+            var temp = DateTime.Now - time_round;
+
             // １世代あたりの時間を保存
-            time_round_record[round_now[2], generation - 1] += (DateTime.Now - time_round).TotalSeconds; ;
+            time_round_record[round_now[2], generation - 1] = temp.TotalSeconds; ;
 
             // トーナメント表の更新
             UpdateTournament();
@@ -416,7 +424,9 @@ public class TetsButton : Tournament
         //{
             // メッセージボックス(終了するか否かの確認)
             //var check = EditorUtility.DisplayDialog("確認", "終了してもよろしいですか？？", "OK", "Cancel");
-            
+
+            var temp = DateTime.Now - time_generation;
+
             // 評価時間測定
             span_generation[generation - 1] = DateTime.Now - time_generation;
             span_round[round_now[2], generation - 1] = DateTime.Now - time_round;
@@ -474,7 +484,7 @@ public class TetsButton : Tournament
 
             /// ------------------------- 次世代の処理 ------------------------
             // GA処理
-            ga.GAprocess(generation);
+            ga.GAprocess(generation - 1);
 
             // 世代更新
             generation++;
@@ -559,19 +569,19 @@ public class TetsButton : Tournament
         }
 
         //評価時間の書き込み
-        //if (check == 0)
-        //{
-        //    string copy_ts = end_time_generation.ToString("0.00[sec]");
-        //    sw.Write("Evaluation time:," + copy_ts);
-        //    sw.WriteLine();
-        //}
+        if (check == 0)
+        {
+            string copy_ts = span_generation[generation - 1].TotalSeconds.ToString();
+            sw.Write("Evaluation time:," + copy_ts);
+            sw.WriteLine();
+        }
         //「終了」ボタンが押された場合
-        //if (check == 1)
-        //{
-        //    string copy_ts = end_time_generation.ToString("0.00[sec]");
-        //    sw.Write("Evaluation time:," + copy_ts + "End");
-        //    sw.WriteLine();
-        //}
+        if (check == 1)
+        {
+            string copy_ts = span_generation[generation - 1].TotalSeconds.ToString();
+            sw.Write("Evaluation time:," + copy_ts + "End");
+            sw.WriteLine();
+        }
         //sw.Close();
 
         sw.Flush();
@@ -601,7 +611,7 @@ public class TetsButton : Tournament
         sw.Write("Winner,");
 
         for (int i = 0; i < MEMBER - 1; i++)
-            sw.Write(tor.result[i, 0].ToString() + ",");
+            sw.Write(tor.result[i, 0].ToString("0.00") + ",");
 
         //改行処理
         sw.WriteLine();
@@ -609,7 +619,7 @@ public class TetsButton : Tournament
         //見出し表示
         sw.Write(",Loser,");
         for (int i = 0; i < MEMBER - 1; i++)
-            sw.Write(tor.result[i, 1].ToString() + ",");
+            sw.Write(tor.result[i, 1].ToString("0.00[sec]") + ",");
 
         //改行処理
         sw.WriteLine();

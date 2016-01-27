@@ -5,6 +5,7 @@ public class LEDLight : TetsButton {
 
     // 手が入っているかどうか
     public bool enter_log = false;
+    bool cool_time = true;
 
 	// Use this for initialization
 	void Start () {
@@ -31,12 +32,25 @@ public class LEDLight : TetsButton {
     void OnTriggerExit(Collider col)
     {
         //Debug.Log("T Exit !!");
-        if (col.name == "palm_left" && enter_log == true)
+        if (col.name == "palm_left" && enter_log == true && cool_time == true)
+        {
             LeftSelect();
-        if (col.name == "palm_right" && enter_log == true)
+            cool_time = false;
+            Invoke("CoolSet", 2.0f);
+        }
+        if (col.name == "palm_right" && enter_log == true && cool_time == true)
+        {
             RightSelect();
+            cool_time = false;
+            Invoke("CoolSet", 2.0f);
+        }
 
         // 退室状態にする
         enter_log = false;
+    }
+
+    void CoolSet()
+    {
+        cool_time = true;
     }
 }
