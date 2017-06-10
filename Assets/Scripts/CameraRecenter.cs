@@ -13,7 +13,7 @@ public class CameraRecenter : MonoBehaviour {
 	void Update () {
 
         // カメラ画面のセンターのリトラッキング
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.R))
         {
             InputTracking.Recenter();
         }

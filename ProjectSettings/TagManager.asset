@@ -8,6 +8,7 @@ TagManager:
   - Right_Nail
   - Hand
   - End
+  - chara
   layers:
   - Default
   - TransparentFX

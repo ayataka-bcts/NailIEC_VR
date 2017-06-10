@@ -4,6 +4,7 @@ using UnityEditor;
 #endif
 using System.Collections;
 using System.IO;
+using System;
 using UnityEngine.UI;
 
 public class LoadScene : Constant
@@ -40,11 +41,11 @@ public class LoadScene : Constant
     {
         // 現在起動しているパスの取得(C:/Users/kis_user/Desktop/(exe形式の名前)_Data)
         path = Application.streamingAssetsPath;
-        output = path + "/Output";
+        output = path + "/Output " + DateTime.Now.Day.ToString() + "日" + DateTime.Now.Hour.ToString() + "：" + DateTime.Now.Minute.ToString();
 
         // 同じフォルダが存在すれば，中身ごと削除
-        if (Directory.Exists(output) == true)
-            Directory.Delete(output, true);
+        //if (Directory.Exists(output) == true)
+            //Directory.Delete(output, true);
 
         // フォルダ作成
         Directory.CreateDirectory(output);
@@ -59,7 +60,7 @@ public class LoadScene : Constant
         {
             int[] bits = new int[GENE_LENGTH];
             for (int j = 0; j < GENE_LENGTH; j++)
-                bits[j] = Random.Range(0, 2);
+                bits[j] = UnityEngine.Random.Range(0, 2);
 
             // 初期個体のビット列に応じてテクスチャを作成
             CreateTexture(bits, i);

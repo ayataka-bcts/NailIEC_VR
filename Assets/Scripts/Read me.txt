@@ -1,0 +1,14 @@
+CameraRecenter:カメラの中央を設定しなおす
+Constant:定数とか遺伝子長とか
+DesignGenerate:ビット列からデコードしてデザインを描画
+EndGeneration:全対戦終了したときの処理
+EndPanel:ボタン押された時の処理
+GeneticAlgolithm:GA
+Individual:各解候補
+LEDLight:投票ボタン
+LoadScene:シーンを読み込んだときに実行する処理
+Nail:ネイルデザインを表現するための描画関数
+NextPannel:次の世代へ進むボタンを押したときの処理
+TetsButton:トーナメントの更新/結果の出力/左右の手にネイルデザインを表示
+Tournament:トーナメント方式の中身の関数
+Tutorial:練習の処理

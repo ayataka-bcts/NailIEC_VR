@@ -100,6 +100,7 @@ public class TetsButton : Tournament
         RoundDisplay();
         //SupportDisplay();
 
+        // それぞれの手が存在しているならネイルデザインを表示
         if (left == true)
         {
             DisplayNow(left, tex_L);
