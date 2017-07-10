@@ -4,7 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
+  - Left_Nail
+  - Right_Nail
   - Hand
+  - End
+  - chara
   layers:
   - Default
   - TransparentFX

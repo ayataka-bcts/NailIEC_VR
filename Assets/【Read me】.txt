@@ -1,0 +1,9 @@
+Debugger/Editor/Gizmos/main:よくわからんフォルダ．必要かどうかもわかんない．
+OVR/LeapMotion/LeapMotionVR:LeapMotion動かすためのasset
+Practice:練習シーンの画像とか処理とか
+Prefabs:世代終了とかのボタン
+Resource:手のモデルと手のスキンのテクスチャと各解候補のテクスチャ
+Materials:手のモデルのマテリアル
+StreamingAssets:結果を出力するフォルダ
+SimpleSky/Unitychan/others:システムに関係ない飾り
+Scripts:プログラムのファイル
